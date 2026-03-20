@@ -50,7 +50,7 @@ export default function AccountTokens() {
             
             <div className="Tokens_Table w-full overflow-x-auto hide_scrollbar" ref={scrollDrivenRef}>
                 <div className="w-fit min-w-full xl:w-full">
-                    <header className={`w-full flex token_list_div justify-between gap-x-4 items-center font-medium text-white/60 pl-2 pr-6 sticky top-0 right-0 z-9 py-1 border-b border-b-[var(--border)] `}>
+                    <header className={`w-full flex justify-between gap-x-4 items-center font-medium text-white/60 pl-2 pr-6 sticky top-0 right-0 z-9 py-1 border-b border-b-[var(--border)] `}>
                         <div className={`flex items-center token_list_div_first w-[250px] pl-5 pr-3 gap-x-2 h-[39px] sticky left-0 z-1 text-xs xl:w-[270px] max-[500px]:w-[220px]`}>TOKENS</div>
 
                         <div className={`flex justify-end itmes-center w-[100px] text-inherit text-xs`}>PRICE</div>
@@ -123,7 +123,7 @@ export default function AccountTokens() {
                                     // check global.css, there is something we did for token_list_div and _first
                                     <Link href={`/invest/${token._id}`} key={`items-${token._id}-${index}`}
                                     className={`w-full token_list_div flex justify-between gap-x-4 font-medium items-center pl-2 pr-6 py-3 border-b border-b-[var(--border)] `}>
-                                        <div className={`text-white gap-x-2 token_list_div_first flex items-center w-[250px] pl-4 pr-3 h-[39px] sticky left-0 z-5 xl:w-[270px] max-[500px]:w-[220px]`}>
+                                        <div className={`text-white gap-x-2 token_list_div_first flex items-center w-[250px] pl-1 min-[400px]:pl-4 pr-3 h-[39px] sticky left-0 z-5 xl:w-[270px] max-[500px]:w-[220px]`}>
                                             <div className="w-fit">
                                                 <div className="w-[25px] h-[25px] sm:w-[30px] sm:h-[30px] rounded-full bg-white/75"></div>
                                             </div>

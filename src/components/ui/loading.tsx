@@ -10,3 +10,25 @@ export const Skeleton = ({ className }: { className?: string }) => {
         <div className={`${className||""} Skeleton`}></div>
     );
 };
+
+export const FormatTokenPrice = ({ price }: { price: any }) => {
+    const [f, s] = String(price).split(".");
+    let spl = s || "";
+    let i = 0;
+
+    if(s) {
+        while(i < s.length && s[i] == "0") i++;
+        if(i > 3) spl = s.slice(i, i+4);
+    }
+
+    return (
+        <span>
+            {f}
+            {s && <>
+                {"."}
+                <sub>{`(${i})`}</sub>
+                {spl}
+            </>}
+        </span>
+    )
+};

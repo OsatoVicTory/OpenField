@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { MdContentCopy } from "react-icons/md";
 
-export default function Copy({ text, className } : { text: string, className?: string }) {
+export default function Copy({ text, className, title } : { text: string, className?: string, title?: string }) {
 
     const [copied, setCopied] = useState(false);
     
@@ -19,7 +19,7 @@ export default function Copy({ text, className } : { text: string, className?: s
                     } catch (err) {
                         // 
                     }
-                }} /> 
+                }} title={title} /> 
             )
         } else {
             return <FaCheck className={`${className} text-[rgba(68,231,68,0.72)]`} />

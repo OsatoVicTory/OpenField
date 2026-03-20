@@ -27,7 +27,7 @@ export default function SideNavbar({ collapse, setCollapse }: { collapse: boolea
                     <div className="w-full flex items-center justify-between mt-0">
                         <Link href={"/"} className={`flex items-center py-3 text-white w-fit ${collapse ? "px-1" : ""}`}>
                             <Image src={logo} alt="logo" className={`rounded-[3] ${collapse ? "w-[33px] h-[33px]" : "w-[24px]"} h-[25px]`} />
-                            <h1 className={`font-sans font-bold text-2xl ml-[10px] ${collapse ? "hidden" : ""}`}>AGROW</h1>
+                            <h1 className={`font-bold text-2xl ml-[10px] ${collapse ? "hidden" : ""}`}>OpenField</h1>
                         </Link>
                         <button className="p-2 rounded-sm flex items-center justify-center cursor-pointer border border-[rgb(38,39,45)] md:hidden" onClick={() => setCollapse()}>
                             <GiHamburgerMenu className="w-[18px] h-[18px] text-white/81" />

@@ -76,10 +76,25 @@ body {
 .Account .token_list_div:hover .token_list_div_first {
   background-color: #242424 !important;
 }
+sub {
+  font-size: 10px;
+}
 
 /* table scroll */
 
 /* scrollbar */
+.small_scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.small_scrollbar::-webkit-scrollbar-track {
+  background-color: none;
+}
+.small_scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--text-grey);
+}
+
 .hide_scrollbar::-webkit-scrollbar {
   width: 0px;
   height: 0px;
@@ -100,6 +115,18 @@ body {
   }
 }
 
+.fader {
+  animation: fader 0.3s ease-in-out;
+}
+
+@keyframes fader {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 @keyframes scroll-shadow {
   0% {
     box-shadow: none;

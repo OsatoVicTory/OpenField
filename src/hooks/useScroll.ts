@@ -3,13 +3,13 @@
 import { useCallback, useEffect } from "react";
 import throttle from "lodash.throttle";
 
-const useScrollThrottle = (eleId: string, scrollFn: (s: any) => void, cooldown = 500) => {
+const useScrollThrottle = (eleId: string, scrollFn: (s: any) => void, cooldown = 500, deps: any[] = []) => {
 
     const fn = (e: Event | null) => {
         if(!e) return;
-        const { scrollTop, scrollLeft, scrollHeight, offsetHeight } = e.target as HTMLDivElement;
+        const { scrollTop, scrollLeft, scrollHeight, offsetHeight, clientHeight } = e.target as HTMLDivElement;
         // console.log(scrollTop)
-        scrollFn({ x: scrollLeft, y: scrollTop, scrollHeight, offsetHeight });
+        scrollFn({ x: scrollLeft, y: scrollTop, scrollHeight, offsetHeight, clientHeight });
     };
 
     const handleScroll = useCallback(throttle((e: Event) => fn(e), cooldown), []);
@@ -23,7 +23,7 @@ const useScrollThrottle = (eleId: string, scrollFn: (s: any) => void, cooldown =
         return () => {
             if(ele) ele.removeEventListener('scroll', handleScroll);
         }
-    }, [eleId]);
+    }, [eleId, ...deps]);
 };
 
 export default useScrollThrottle;

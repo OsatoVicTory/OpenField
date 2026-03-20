@@ -1,0 +1,23 @@
+CREATING TOKEN:
+   -Creator creates database collection for the token, for both "<token_name>_BUY" & "<token_name>_SELL"
+   -Initial supply and circulation_amount for the token is set by creator
+   -Initial supply is amount of tokens existing in general
+   -So from it, remove circulation_amount and put in circulation by placing it as sell order with circulation_order: true
+   -The remaining is transferred to creator normal wallet(i.e not trading wallet), so he/she can send to whoever, say teammates or community
+
+BUY order 
+   -From trading wallet, place buy order
+
+SELL order 
+   -From trading wallet, place sell order
+   -The order could have circulation_order: true, if order is from creator to put token into circulation
+
+BURNING
+   -Remove qty from sell order with circulation_order: true, then put in creator's trading wallet
+   -Transfer from creator trading wallet to normal wallet, then transfer to a burner or unusable address
+   -or u can transfer staright from trading wallet to burner wallet, if it's logical/acceptable this way
+
+MINTING OR CREATING NEW TOKEN TO SUPPLY
+   -Mint into creator address
+   -Creator then transfers the token to his/her trading wallet on the platform
+   -Send into circulation, by placing sell order with the newly set token supply amount/qty

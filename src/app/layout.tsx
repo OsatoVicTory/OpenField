@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { jetBrainsMono } from "@/ui/fonts";
 import "./globals.css";
+import { AppProvider } from "@/context/app";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +18,7 @@ export default function RootLayout({
       <body
         className={`${jetBrainsMono.className} antialiased`}
       >
-        {children}
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   );
