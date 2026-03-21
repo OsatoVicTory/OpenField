@@ -21,6 +21,7 @@ export default function InvestPage() {
     const lstId = useRef<string>("");
     const filtersRef = useRef<any>({ cap: 0, cat: [0] });
     const loadedRef = useRef(false);
+    const stopScrollFetchingRef = useRef(false);
 
     const [showFilter, setShowFilter] = useState(false);
 
@@ -73,8 +74,12 @@ export default function InvestPage() {
             }
 
             const res = await filterTokens(lstId.current, pageSize, filter);
-            lstId.current = res[res.length - 1]?._id || "";
-            setTokens(changes ? res : [...tokens, ...res]); // loading.state helps track when tokens changes
+            if(res[res.length - 1]?._id === lstId.current) {
+                stopScrollFetchingRef.current = true;
+            } else {
+                lstId.current = res[res.length - 1]?._id || "";
+                setTokens(changes ? res : [...tokens, ...res]); // loading.state helps track when tokens changes
+            }
             setLoading({ loading: false, error: false, loaded: true, state: Date.now() });
             loadedRef.current = true;
         } catch (err) {
@@ -104,6 +109,7 @@ export default function InvestPage() {
         }
 
         lstId.current = "";
+        stopScrollFetchingRef.current = false;
         FilterFetchTokens(true);
 
     }, [loading.loading, loading.loaded, filters.cap, filters.cat.length]);
@@ -139,7 +145,7 @@ export default function InvestPage() {
     }, [scrollChange]);
 
     useScrollThrottle("dashboard-main", ({ y, scrollHeight, clientHeight }: any) => {
-        if(loadedRef.current && Math.ceil(scrollHeight - y - clientHeight) < 1) {
+        if(!stopScrollFetchingRef.current && loadedRef.current && Math.ceil(scrollHeight - y - clientHeight) < 1) {
             setScrollChange(Date.now());
         }
     }, 300, [loading.loaded, loading.state, tokens.length]);
