@@ -35,7 +35,7 @@ export default function TokenInvest({ id } : { id: string }) {
 
     return (
         <div className="w-full Token_Page min-h-[calc(100vh+140px)] mt-[-140px]">
-            <div className="w-full flex pt-[140px] relative">
+            <div className="w-full flex flex-col lg:flex-row pt-[140px] relative">
                 <div className={`absolute z-8 inset-0`} style={{ backgroundColor: color }}></div>
                 <div className="size-full absolute z-8 inset-0">
                     <div className="tk_gradient absolute inset-0"></div>
@@ -133,7 +133,7 @@ export default function TokenInvest({ id } : { id: string }) {
                     </div>
                 </div>
 
-                <div className={`w-full lg:w-[270px] xl:w-[330px] pl-2 pr-5 pt-6 z-8 ${!showSide ? "max-lg:hidden" : ""}`}>
+                <div className={`w-full lg:w-[270px] xl:w-[330px] pl-2 pr-5 pt-6 z-8 ${!showSide ? "" : ""}`}>
                     <div className={`w-full flex flex-col gap-y-7 rounded-lg bg-[var(--frosted-bg)]/90 border border-[var(--frosted-border)]`}>
                         <div className="full flex items-center gap-x-3 px-3 py-5 border-b border-b-[var(--frosted-border)]">
                             {

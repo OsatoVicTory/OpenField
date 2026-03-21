@@ -17,15 +17,26 @@ export default function InvestPage() {
 
     const pageSize = 20;
     const [loading, setLoading] = useState<LoadingType>({ loading: true, error: false, loaded: false, state: 0 });
+    const [scrollChange, setScrollChange] = useState(0);
     const lstId = useRef<string>("");
     const filtersRef = useRef<any>({ cap: 0, cat: [0] });
+    const loadedRef = useRef(false);
 
     const [showFilter, setShowFilter] = useState(false);
 
-    // const [tokens, setTokens] = useState(Array(20).fill(0). map((_, i) => {
+    // const t = Array(10).fill(0). map((_, i) => {
     //     const mul = (i && i%3 === 0) ? -1.0 : 1.0;
-    //     return { _id: i, one_hr_change: 3.21 * mul, one_day_change: 41.87 * mul, thirty_day_change: 125.89 * mul };
-    // }));
+    //     const [name, price, total_supply, img, public_id, creator_account_id, meta_data, one_day_volume] = [
+    //         `Agrow-${i}`, 0.00102, 900000, "", "", "", "", 10000
+    //     ];
+    //     const [one_hr, one_day, thirty_days] = [
+    //         {change: 3.21 * mul }, { change: 41.87 * mul }, { change: 125.89 * mul }
+    //     ];
+    //     return { 
+    //         _id: i, one_hr, one_day, thirty_days, volume_cnt: 300000,
+    //         name, price, total_supply, img, public_id, creator_account_id, meta_data, one_day_volume
+    //     };
+    // });
 
     const [tokens, setTokens] = useState<TokenType[]>([]);
     const [topFilter, setTopFilter] = useState("Trending");
@@ -44,6 +55,7 @@ export default function InvestPage() {
             //if changes is true, override loaded to false so we can show loading
             //as changes true means this is not triggered onScroll to append more data
             setLoading({ ...loading, loading: true, loaded: !changes, error: false }); 
+            loadedRef.current = !changes;
 
             const { cap, cat } = filtersRef.current;
             const filter: any = {};
@@ -64,6 +76,7 @@ export default function InvestPage() {
             lstId.current = res[res.length - 1]?._id || "";
             setTokens(changes ? res : [...tokens, ...res]); // loading.state helps track when tokens changes
             setLoading({ loading: false, error: false, loaded: true, state: Date.now() });
+            loadedRef.current = true;
         } catch (err) {
             setLoading({ ...loading, loading: false, error: true });
         } 
@@ -121,9 +134,15 @@ export default function InvestPage() {
 
     }, []);
 
+    useEffect(() => {
+        FilterFetchTokens();
+    }, [scrollChange]);
+
     useScrollThrottle("dashboard-main", ({ y, scrollHeight, clientHeight }: any) => {
-        if(loading.loaded && Math.ceil(scrollHeight - y - clientHeight) < 1) FilterFetchTokens();
-    }, 500,[loading.loaded, loading.state]);
+        if(loadedRef.current && Math.ceil(scrollHeight - y - clientHeight) < 1) {
+            setScrollChange(Date.now());
+        }
+    }, 300, [loading.loaded, loading.state, tokens.length]);
 
 
     return (
@@ -380,7 +399,7 @@ export default function InvestPage() {
 
                                     {/* infinite scroll */}
                                     {loading.loading && <div className="w-full px-3 flex justify-center py-6">
-                                        <Spinner className="w-[33px] h-[33px] rounded-full" />
+                                        <Spinner className="w-[33px] h-[33px] rounded-full loading-spinner-grey" />
                                     </div>}
 
                                     </>

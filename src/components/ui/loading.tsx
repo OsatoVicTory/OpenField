@@ -22,11 +22,11 @@ export const FormatTokenPrice = ({ price }: { price: any }) => {
     }
 
     return (
-        <span>
+        <span title={price}>
             {f}
             {s && <>
                 {"."}
-                <sub>{`(${i})`}</sub>
+                {i > 3 && <sub>{`(${i})`}</sub>}
                 {spl}
             </>}
         </span>

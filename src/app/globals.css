@@ -293,9 +293,11 @@ select option, input::placeholder, textarea::placeholder {
 
 /* loading spinner */
 .loading-spinner {
-  border-style: solid;
+  /* border-style: solid;
   border-color: #a5a4a4;
-  border-bottom-color: #fff;
+  border-bottom-color: #fff; */
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid rgb(20, 20, 20);
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;

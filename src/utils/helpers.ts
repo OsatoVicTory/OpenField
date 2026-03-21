@@ -25,6 +25,6 @@ export const formatValue = (val: number) => {
     } else if (val >= 1E3) {
         return `${(val / 1E3).toFixed(2)}K`;
     } else {
-        return val;
+        return val.toFixed(2);
     }
 }
